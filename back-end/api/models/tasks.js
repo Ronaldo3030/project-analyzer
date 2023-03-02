@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Tasks.init({
     name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     status: DataTypes.STRING,
     conclusion: DataTypes.DATE
   }, {
