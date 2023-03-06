@@ -112,7 +112,8 @@ function ListTasks() {
           setDescription('');
           setConclusion(new Date());
           setStatus('');
-          setErro(BsFillEaselFill)
+          setErro(false)
+          setModal(false)
         })
     } catch (error) {
       console.log(error)
@@ -138,6 +139,7 @@ function ListTasks() {
       </ListTasksContainer>
 
 
+      {/* MODAL */}
       <Modal title="Adicionar tarefa" onClose={() => setModal(false)} show={modal} onSave={saveTask}>
         {erro ? (
           <MessageErro>

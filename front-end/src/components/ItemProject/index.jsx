@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import formatDate from '../../functions/formatDate';
 
 const ItemContainer = styled.li`
   display: flex;
@@ -20,13 +21,14 @@ const ItemContainer = styled.li`
 `
 
 function ItemProject(props) {
+  
   return (
     <ItemContainer>
       <div className='left'>
         <input type="checkbox" />
         <p>{props.name}</p>
       </div>
-      <p>{props.date}</p>
+      <p>{formatDate(props.date)}</p>
     </ItemContainer>
   );
 }
