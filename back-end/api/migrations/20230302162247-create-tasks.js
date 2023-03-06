@@ -18,6 +18,9 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      state: {
+        type: Sequelize.BOOLEAN
+      },
       conclusion: {
         type: Sequelize.DATE
       },
