@@ -54,7 +54,6 @@ border: none;
 cursor: pointer;
 border-radius: 4px;
 margin: 0 7.5px;
-font-weight: 600;
 transition: filter ease-in-out .15s;
 
 &:hover{
@@ -82,7 +81,7 @@ const Modal = (props) => {
         </div>
         <div className="modal-footer">
           <Button className="btn-close" onClick={props.onClose}>Fechar</Button>
-          <Button className="btn-save" onClick={props.onClose}>Salvar</Button>
+          <Button className="btn-save" onClick={props.onSave}>Salvar</Button>
         </div>
       </div>
     </ContainerModal>

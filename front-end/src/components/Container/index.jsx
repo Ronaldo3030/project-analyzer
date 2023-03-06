@@ -10,6 +10,10 @@ height: 80%;
 border-radius: 16px;
 display: grid;
 grid-template-columns: 1fr 3fr;
+
+.meus-projetos{
+  overflow-y: auto;
+}
 `
 const MenuLeftContainer = styled.div`
 background-color: #F8F9FA;

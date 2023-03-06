@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BsPlusCircle, BsList, BsBox } from "react-icons/bs";
+import { BsPlusCircle, BsList } from "react-icons/bs";
 
 const ListButton = styled.ul`
   width: 100%;
@@ -8,7 +8,7 @@ const Selected = styled.li`
   color: #6038D1;
   background-color: #EBE5FC;
   margin: 5px;
-  padding: 5px 7.5px;
+  padding: 15px;
   font-weight: 500;
   border-radius: 4px;
   cursor: pointer;
@@ -49,7 +49,7 @@ const LiButton = styled.li`
 function Logo() {
   return (
     <ListButton>
-      <LiButton><BsList /> Todas as tarefas</LiButton>
+      <Selected><BsList /> Todas as tarefas</Selected>
       <LiButton><BsPlusCircle /> Criar tarefa</LiButton>
     </ListButton>
   );
