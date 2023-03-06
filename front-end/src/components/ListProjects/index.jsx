@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ItemProject from '../ItemProject'
-import { BsFillEaselFill, BsPlus } from "react-icons/bs";
+import { BsPlus } from "react-icons/bs";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from '../Modal';
@@ -35,7 +35,7 @@ p{
   }
 `
 const ListTasksContainer = styled.ul`
-
+position: relative;
   
 `
 const InputForm = styled.div`
@@ -68,13 +68,13 @@ function ListTasks() {
   const [status, setStatus] = useState('');
 
   const [tasks, setTasks] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [modalAdd, setModalAdd] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [erro, setErro] = useState(false);
 
   const getTasks = async () => {
     try {
-      const response = await axios.get(`${url}/api/tasks`)
+      const response = await axios.get(`${url}/api/tasks/asc`)
       const data = response.data;
 
       setTasks(data)
@@ -86,6 +86,20 @@ function ListTasks() {
   useEffect(() => {
     getTasks();
   }, []);
+
+  const handleDeleteTask = async (id) => {
+    await axios.delete(`${url}/api/tasks/${id}`);
+    getTasks();
+  }
+  const handleStateTask = async (id) => {
+    const element = await axios.get(`${url}/api/tasks/${id}`);
+    const state = element.data.state;
+    if(state){
+      await axios.put(`${url}/api/tasks/${id}`, {state: false});
+      return;
+    }
+    await axios.put(`${url}/api/tasks/${id}`, {state: true});
+  }
 
   const saveTask = async () => {
     try {
@@ -103,6 +117,7 @@ function ListTasks() {
           return
         }
       }
+      sendData.state = false;
 
       await axios.post(`${url}/api/tasks`, sendData)
         .then(resp => {
@@ -112,8 +127,8 @@ function ListTasks() {
           setDescription('');
           setConclusion(new Date());
           setStatus('');
-          setErro(false)
-          setModal(false)
+          setErro(false);
+          setModalAdd(false);
         })
     } catch (error) {
       console.log(error)
@@ -122,8 +137,8 @@ function ListTasks() {
 
   return (
     <>
-      <ContainerAddTarefa>
-        <p onClick={() => setModal(true)}><BsPlus /> Adicionar tarefa</p>
+      <ContainerAddTarefa onClick={() => setModalAdd(true)}>
+        <p><BsPlus /> Adicionar tarefa</p>
       </ContainerAddTarefa>
 
       <ListTasksContainer>
@@ -132,15 +147,24 @@ function ListTasks() {
             ? (<p>Carregando...</p>)
             : (
               tasks.map(project => (
-                <ItemProject key={project.id} name={project.name} date={project.conclusion} />
+                <ItemProject
+                  key={project.id}
+                  id={project.id}
+                  name={project.name}
+                  date={project.conclusion}
+                  status={project.status}
+                  state={project.state}
+                  onDelete={handleDeleteTask}
+                  onState={handleStateTask}
+                />
               ))
             )
         }
       </ListTasksContainer>
 
 
-      {/* MODAL */}
-      <Modal title="Adicionar tarefa" onClose={() => setModal(false)} show={modal} onSave={saveTask}>
+      {/* MODALS */}
+      <Modal title="Adicionar tarefa" onClose={() => setModalAdd(false)} show={modalAdd} onSave={saveTask}>
         {erro ? (
           <MessageErro>
             Algum campo está vazio!
