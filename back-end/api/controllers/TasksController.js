@@ -9,6 +9,32 @@ module.exports = class TasksController {
     }
   }
 
+  static async getAllTasksByDateAsc(req, res) {
+    try {
+      const allTasks = await database.Tasks.findAll({
+        order: [
+          ['conclusion', 'ASC']
+        ]
+      });
+      return res.status(200).json(allTasks);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
+
+  static async getAllTasksByDateDesc(req, res) {
+    try {
+      const allTasks = await database.Tasks.findAll({
+        order: [
+          ['conclusion', 'DESC']
+        ]
+      });
+      return res.status(200).json(allTasks);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
+
   static async getOneTask(req, res) {
     const { id } = req.params;
 
@@ -49,7 +75,7 @@ module.exports = class TasksController {
 
     try {
       await database.Tasks.destroy({ where: { id: Number(id) } });
-      return res.status(200).json({message: "Success"});
+      return res.status(200).json({ message: "Success" });
     } catch (err) {
       return res.status(500).json(err.message);
     }
