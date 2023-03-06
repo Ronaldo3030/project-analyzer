@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import formatDate from '../../functions/formatDate';
 import { BsTrashFill } from "react-icons/bs";
 import { useState, useEffect } from 'react';
+import Badge from '../Badge';
 
 const ItemContainer = styled.li`
   display: flex;
@@ -84,6 +85,7 @@ function ItemProject(props) {
         <p>{props.name}</p>
       </div>
       <div className='left'>
+        <Badge text={props.status}/>
         <p>{formatDate(props.date)}</p>
         <div className="container-buttons">
           <button onClick={handleDelete}>

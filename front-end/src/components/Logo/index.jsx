@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../../logo.svg'
+import logo from '../../logo.png'
 
 const LogoContainer = styled.div`
 display: flex;
@@ -12,6 +12,7 @@ const ImageLogo = styled.img`
 width: 50px;
 height: auto;
 object-fit: contain;
+margin-right: 15px;
 `
 
 function Logo() {
