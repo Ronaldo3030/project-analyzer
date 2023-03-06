@@ -10,6 +10,7 @@ const ItemContainer = styled.li`
   padding: 10px;
   border-bottom: 1px solid rgb(108 117 125 / 16%);  
   align-items: center;
+  min-width: 350px;
 
   input{
     margin-right: 10px;

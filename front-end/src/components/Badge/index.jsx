@@ -18,7 +18,7 @@ white-space: nowrap;
 vertical-align: baseline;
 border-radius: var(--bs-badge-border-radius);
 color: #fff!important;
-margin-right: 15px;
+margin: 0 15px;
 `
 
 const Badge = (props) => {
