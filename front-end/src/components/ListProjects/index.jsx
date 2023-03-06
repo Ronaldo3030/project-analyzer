@@ -3,6 +3,7 @@ import ItemProject from '../ItemProject'
 import { BsPlus } from "react-icons/bs";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from '../Modal';
 
 const url = "http://localhost:3030"
 
@@ -24,47 +25,53 @@ p{
     height: 20px;
   }
 `
-const ListProjectsContainer = styled.ul`
+const ListTasksContainer = styled.ul`
 
   
 `
 
-function ListProjects() {
-  const [projects, setProjects] = useState([]);
+function ListTasks() {
+  const [tasks, setTasks] = useState([]);
+  const [modal, setModal] = useState(false);
 
-  const getProjects = async () => {
+  const getTasks = async () => {
     try {
-      const response = await axios.get(`${url}/api/projects`)
+      const response = await axios.get(`${url}/api/tasks`)
       const data = response.data;
 
-      setProjects(data)
+      setTasks(data)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    getProjects();
+    getTasks();
   }, []);
 
   return (
     <>
       <ContainerAddTarefa>
-        <p><BsPlus /> Adicionar tarefa</p>
+        <p onClick={() => setModal(true)}><BsPlus /> Adicionar tarefa</p>
       </ContainerAddTarefa>
-      <ListProjectsContainer>
+
+      <Modal title="Adicionar tarefa" onClose={() => setModal(false)} show={modal}> 
+        <p>asd</p>
+      </Modal>
+
+      <ListTasksContainer>
         {
-          projects.length === 0
+          tasks.length === 0
             ? (<p>Carregando...</p>)
             : (
-               projects.map(project => (
+              tasks.map(project => (
                 <ItemProject key={project.id} name={project.name} date={project.conclusion} />
-               ))
-              )
+              ))
+            )
         }
-      </ListProjectsContainer>
+      </ListTasksContainer>
     </>
   );
 }
 
-export default ListProjects;
+export default ListTasks;

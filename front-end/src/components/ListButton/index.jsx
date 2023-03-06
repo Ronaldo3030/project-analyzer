@@ -50,8 +50,7 @@ function Logo() {
   return (
     <ListButton>
       <LiButton><BsList /> Todas as tarefas</LiButton>
-      <LiButton><BsBox /> Todos projetos</LiButton>
-      <LiButton><BsPlusCircle /> Criar Projeto</LiButton>
+      <LiButton><BsPlusCircle /> Criar tarefa</LiButton>
     </ListButton>
   );
 }
