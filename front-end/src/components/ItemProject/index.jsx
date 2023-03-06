@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-const ProjectContainer = styled.li`
+const ItemContainer = styled.li`
   display: flex;
+  justify-content: space-between;
   color: rgb(108,117,125);
   padding: 10px;
   border-bottom: 1px solid rgb(108 117 125 / 16%);  
@@ -12,15 +13,21 @@ const ProjectContainer = styled.li`
     height: 15px;
     width: 15px;
   }
-
+  .left{
+    display:flex;
+    align-items: center;
+  }
 `
 
-function ItemProject() {
+function ItemProject(props) {
   return (
-    <ProjectContainer>
-      <input type="checkbox" name="" id="" />
-      <p>Fazer tal coisa</p>
-    </ProjectContainer>
+    <ItemContainer>
+      <div className='left'>
+        <input type="checkbox" />
+        <p>{props.name}</p>
+      </div>
+      <p>{props.date}</p>
+    </ItemContainer>
   );
 }
 
